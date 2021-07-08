@@ -1,4 +1,4 @@
-// The simplest realisation of Unique Pointer
+// The simplest realization of Unique Pointer
 
 #pragma once
 
@@ -24,7 +24,7 @@ class UniquePTR
 
     UniquePTR(const UniquePTR& ptr) = delete;
 
-    UniquePTR(UniquePTR&& ptr)
+    UniquePTR(UniquePTR&& ptr) noexcept
       : m_ptr(ptr.m_ptr)
       {
       ptr.m_ptr = nullptr;

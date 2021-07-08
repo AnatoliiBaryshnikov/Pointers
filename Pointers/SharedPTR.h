@@ -1,4 +1,4 @@
-// The simplest realisation of Shared Pointer
+// The simplest realization of Shared Pointer
 
 #pragma once
 
@@ -18,7 +18,12 @@ class SharedPTR
       {
       }
 
-    SharedPTR(T* ptr)
+    SharedPTR(nullptr_t nptr)
+      : m_ptr(nullptr), m_counter(new int(0))
+      {
+      }
+
+    explicit SharedPTR(T* ptr)
       : m_ptr(ptr), m_counter(new int(1))
       {
       }
@@ -26,16 +31,31 @@ class SharedPTR
     SharedPTR(const SharedPTR& ptr)
       : m_ptr(ptr.m_ptr), m_counter(ptr.m_counter)
       { 
-      ++ *m_counter;
+      if (*m_counter > 0)
+        ++*m_counter;
+      }
+
+    SharedPTR(SharedPTR&& ptr) noexcept
+      : m_ptr(ptr.m_ptr), m_counter(ptr.m_counter)
+      {
+      ptr.m_ptr = nullptr;
+      ptr.m_counter = new int(0);
       }
 
     ~SharedPTR()
       {
-      -- *m_counter;
+      --*m_counter;
       if (*m_counter < 1)
-        {
         delete m_ptr;
-        }
+      }
+
+    SharedPTR<T>& operator=(SharedPTR&& ptr) noexcept
+      {
+      m_ptr = ptr.m_ptr;
+      m_counter = ptr.m_counter;
+      ptr.m_ptr = nullptr;
+      ptr.m_counter = new int(0);
+      return *this;
       }
 
     T& operator*()
@@ -48,7 +68,12 @@ class SharedPTR
       return m_ptr;
       }
 
-    const int useCount() const
+    operator bool() const
+      {
+      return m_ptr != nullptr;
+      }
+
+    const int use_count() const
       {
       return *m_counter;
       }
@@ -56,6 +81,25 @@ class SharedPTR
     T* get() const
       {
       return m_ptr;
+      }
+
+    void reset()
+      {
+      m_ptr = nullptr;
+      --*m_counter;
+      m_counter = new int(0);
+      }
+
+    void reset(T* ptr)
+      {
+      m_ptr = ptr;
+      --*m_counter;
+      if (ptr != nullptr)
+        {
+        m_counter = new int(1);
+        return;
+        }
+      m_counter = new int(0);
       }
 
   };

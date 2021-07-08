@@ -26,11 +26,11 @@ int main()
 /// </summary>
 void testUniquePTR()
   {
-  testUniquePTRconstructors();
-  testUniquePTRreset();
-  testUniquePTRoperatorAsterisk();
-  testUniquePTRmoveSemanticsAndDereferencing();
-  testUniquePTRrelease();
+  testcases::testUniquePTRconstructors();
+  testcases::testUniquePTRreset();
+  testcases::testUniquePTRoperatorAsterisk();
+  testcases::testUniquePTRmoveSemanticsAndDereferencing();
+  testcases::testUniquePTRrelease();
   }
 
 /// <summary>
@@ -38,7 +38,11 @@ void testUniquePTR()
 /// </summary>
 void testSharedPTR()
   {
-  testSharedPTRconstructors();
-  testSharedPTRscoped();
+  testcases::testSharedPTRconstructors();
+  testcases::testSharedPTRscoped();
+  testcases::testSharedPTRreset();
+  testcases::testSharedPTRmoveSemanticsAndDereferencing();
+  testcases::testSharedPTRnullptrBehaviour();
+  testcases::testSharedPTRoperatorAsterisk();
   }
 
