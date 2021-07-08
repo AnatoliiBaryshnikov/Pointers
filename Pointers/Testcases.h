@@ -65,7 +65,7 @@ void testUniquePTRreset()
 
   }
 
-void testUniquePTRoperatorStar()
+void testUniquePTRoperatorAsterisk()
   {
   std::cout << "\n >> testing UniquePTR operator *\n";
   UniquePTR<int> foo(new int);
