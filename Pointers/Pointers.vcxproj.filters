@@ -26,5 +26,8 @@
     <ClInclude Include="UniquePTR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Testcases.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

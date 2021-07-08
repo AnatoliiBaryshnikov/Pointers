@@ -142,6 +142,7 @@
     <ClCompile Include="Pointers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Testcases.h" />
     <ClInclude Include="SharedPTR.h" />
     <ClInclude Include="UniquePTR.h" />
   </ItemGroup>
