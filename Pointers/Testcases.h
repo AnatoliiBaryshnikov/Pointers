@@ -34,7 +34,6 @@ namespace testcases {
       ~ItemShared() { std::cout << "ItemShared destroyed\n"; }
     };
 
-  struct S { int* data; };
 
   void testUniquePTRconstructors()
     {
@@ -117,6 +116,7 @@ namespace testcases {
 
     }
 
+  struct S { int* data; };
 
   void testSharedPTRconstructors()
     {
