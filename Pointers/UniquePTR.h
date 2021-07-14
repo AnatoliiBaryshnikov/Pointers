@@ -2,9 +2,6 @@
 
 #pragma once
 
-#ifndef UNIQUE_PTR
-#define UNIQUE_PTR
-
 template <typename T>
 class UniquePTR
   {
@@ -74,5 +71,3 @@ class UniquePTR
       }
 
   };
-
-#endif // !UNIQUE_PTR
