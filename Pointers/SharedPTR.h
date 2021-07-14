@@ -2,9 +2,6 @@
 
 #pragma once
 
-#ifndef SHARED_PTR // todo remove
-#define SHARED_PTR
-
 template <typename T>
 class SharedPTR
   {
@@ -129,5 +126,3 @@ class SharedPTR
       }
 
   };
-
-#endif // !SHARED_PTR
