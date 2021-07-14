@@ -2,7 +2,7 @@
 
 #pragma once
 
-#ifndef SHARED_PTR
+#ifndef SHARED_PTR // todo remove
 #define SHARED_PTR
 
 template <typename T>
@@ -44,9 +44,18 @@ class SharedPTR
 
     ~SharedPTR()
       {
-      --*m_counter;
-      if (*m_counter < 1)
-        delete m_ptr;
+
+        if (*m_counter > 0)
+          {
+          --*m_counter;
+          }
+
+        if (*m_counter < 1)
+          {
+          delete m_ptr;
+          m_ptr = nullptr;
+          }
+
       }
 
     SharedPTR<T>& operator=(SharedPTR&& ptr) noexcept
@@ -55,6 +64,17 @@ class SharedPTR
       m_counter = ptr.m_counter;
       ptr.m_ptr = nullptr;
       ptr.m_counter = new int(0);
+      return *this;
+      }
+
+    SharedPTR<T>& operator=(const SharedPTR& ptr)
+      {
+      m_ptr = ptr.m_ptr;
+      m_counter = ptr.m_counter;
+      if (*m_counter > 0) 
+        { 
+        ++*m_counter;
+        }
       return *this;
       }
 
@@ -86,14 +106,20 @@ class SharedPTR
     void reset()
       {
       m_ptr = nullptr;
-      --*m_counter;
+      if (m_counter > 0) // todo test this
+        {
+        --* m_counter;
+        }
       m_counter = new int(0);
       }
 
     void reset(T* ptr)
       {
       m_ptr = ptr;
-      --*m_counter;
+      if (m_counter > 0) // todo test this
+        {
+        --* m_counter;
+        }
       if (ptr != nullptr)
         {
         m_counter = new int(1);
