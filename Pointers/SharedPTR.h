@@ -106,7 +106,7 @@ class SharedPTR
     void reset()
       {
       m_ptr = nullptr;
-      if (m_counter > 0) // todo test this
+      if (*m_counter > 0) // todo test this
         {
         --* m_counter;
         }
@@ -116,7 +116,7 @@ class SharedPTR
     void reset(T* ptr)
       {
       m_ptr = ptr;
-      if (m_counter > 0) // todo test this
+      if (*m_counter > 0) // todo test this
         {
         --* m_counter;
         }
