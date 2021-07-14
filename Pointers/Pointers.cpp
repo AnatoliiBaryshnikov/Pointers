@@ -16,7 +16,7 @@ int main()
 
   std::cout << "\n\n[ Some simplest testing and output for SharedPTR ]\n\n";
   testSharedPTR();
-  
+
   return 0;
   }
 
@@ -44,5 +44,6 @@ void testSharedPTR()
   testcases::testSharedPTRmoveSemanticsAndDereferencing();
   testcases::testSharedPTRnullptrBehaviour();
   testcases::testSharedPTRoperatorAsterisk();
+  testcases::testSharedPTRcopyAssignment();
   }
 

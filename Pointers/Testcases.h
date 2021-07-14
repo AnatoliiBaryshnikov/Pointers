@@ -2,12 +2,11 @@
 //
 
 #pragma once
-#ifndef TESTCASES
-#define TESTCASES
 
 #include <iostream>
 #include "SharedPTR.h"
 #include "UniquePTR.h"
+#include <memory>
 
 /// <summary>
 /// This namespace contains testing functions for UniquePTR and SharedPTR
@@ -239,5 +238,40 @@ namespace testcases {
     std::cout << "bar: " << (*bar == 100 ? "passed" : "failed") << '\n';
     }
 
+  void testSharedPTRcopyAssignment()
+    {
+    std::cout << "\n >> testing SharedPTR copy assignment\n";
+
+    SharedPTR<int> foo(new int);
+    SharedPTR<int> bar;
+    SharedPTR<int> baz;
+
+    std::cout << (foo.use_count() == 1 ? "passed" : "failed") << '\n';
+    std::cout << (bar.use_count() == 0 ? "passed" : "failed") << '\n';
+    std::cout << (baz.use_count() == 0 ? "passed" : "failed") << '\n';
+    std::cout << "foo: " << (foo.get() == nullptr ? "failed" : "passed") << '\n';
+    std::cout << "bar: " << (bar.get() == nullptr ? "passed" : "failed") << '\n';
+
+    bar = baz;
+    std::cout << (bar.use_count() == 0 ? "passed" : "failed") << '\n';
+    std::cout << (baz.use_count() == 0 ? "passed" : "failed") << '\n';
+    std::cout << "bar: " << (bar.get() == nullptr ? "passed" : "failed") << '\n';
+    std::cout << "baz: " << (baz.get() == nullptr ? "passed" : "failed") << '\n';
+
+    bar = foo;
+
+    std::cout << (foo.use_count() == 2 ? "passed" : "failed") << '\n';
+    std::cout << (bar.use_count() == 2 ? "passed" : "failed") << '\n';
+
+    std::cout << "foo: " << (foo.get() == nullptr ? "failed" : "passed") << '\n';
+    std::cout << "bar: " << (bar.get() == nullptr ? "failed" : "passed") << '\n';
+
+    *foo = 100;
+
+    std::cout << "foo: " << (*foo == 100 ? "passed" : "failed") << '\n';
+    std::cout << "bar: " << (*bar == 100 ? "passed" : "failed") << '\n';
+
+
+    }
+
   }
-#endif // !TESTCASES
